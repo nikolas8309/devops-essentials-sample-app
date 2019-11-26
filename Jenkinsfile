@@ -11,8 +11,8 @@ pipeline {
       def VERSION = 'latest'
       
       def REGION = "us-east-2"
-      #def SERVICE_NAME = "dw-web-panel"
-      #def ECS_CLUSTER_SUFFIX = "-services-cluster"
+      // def SERVICE_NAME = "dw-web-panel"
+      // def ECS_CLUSTER_SUFFIX = "-services-cluster"
 
       //auto populated, do not touch
       def IMAGE = "$ECR_NAME/$PROJECT:$VERSION"
@@ -21,7 +21,7 @@ pipeline {
   }
   
   parameters {
-    #booleanParam(name: 'deployToDev', defaultValue: false, description: 'Deploy to dev?')
+    // ooleanParam(name: 'deployToDev', defaultValue: false, description: 'Deploy to dev?')
     booleanParam(name: 'deployToStg', defaultValue: false, description: 'Deploy to stg?')
     booleanParam(name: 'deployToPrd', defaultValue: false, description: 'Deploy to prd?')
   }
@@ -30,7 +30,7 @@ pipeline {
     stage('PrintInfo') {
         steps {
             sh """
-            #echo "deployToDev=${params.deployToDev}"
+            // echo "deployToDev=${params.deployToDev}"
             echo "deployToStg=${params.deployToStg}"
             echo "deployToPrd=${params.deployToPrd}"
             """
