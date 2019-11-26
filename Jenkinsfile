@@ -53,43 +53,9 @@ pipeline {
         }
     }
     
-    stage('Docker push'){
-        steps{
-            script{
-                // login to ECR
-                sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
-
-                // Push the Docker image to ECR
-                docker.withRegistry(ECRURL){
-                    docker.image(IMAGE).push()
-                }
-            }
-        }
-    }
-
-    stage('DeployToStg') {
-        when {
-            environment name: 'deployToDev', value: 'true'
-            beforeAgent true
-        }
-        steps {
-            script{    
-                environmentToDeploy='stg'
-                ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
-            }
-            ecsDeploy("$REGION","seirina","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
-        }
-    }        
-
-    stage('Bake stg docker image') {
-        steps{
-            script{
-                DCR_IMAGE = docker.build ("$IMAGE", "--build-arg build_config=stg .")
-            }
-        }
-    }
+   
     
-    stage('Stg Docker push'){
+    stage('Docker push'){
         steps{
             script{
                 // login to ECR
