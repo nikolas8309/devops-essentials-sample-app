@@ -6,7 +6,7 @@ pipeline {
                 echo 'Running build automation'
                 sh './gradlew build'
                 archiveArtifacts artifacts: 'src/index.html'
-                sh 'pwd'
+                sh 'ls -a /var/lib/jenkins/workspace/experimental_site_master'
             }
         }
         stage('DeployToStage') {
