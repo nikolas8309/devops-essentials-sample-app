@@ -6,7 +6,7 @@ pipeline {
                 echo 'Running build automation'
                 sh './gradlew build'
                 archiveArtifacts artifacts: 'src/index.html'
-                pwd
+                sh 'pwd'
             }
         }
         stage('DeployToStage') {
