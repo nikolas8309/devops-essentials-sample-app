@@ -45,13 +45,13 @@ pipeline {
       }
     }        
     
-    stage('Bake docker image') {
-        steps{
-            script{
-                DCR_IMAGE = docker.build ("$IMAGE")
-            }
-        }
-    }
+    //stage('Bake docker image') {
+      //  steps{
+        //    script{
+          //      DCR_IMAGE = docker.build ("$IMAGE")
+            //}
+        //}
+    //}
     
    
     
