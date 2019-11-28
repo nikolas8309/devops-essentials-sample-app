@@ -6,11 +6,11 @@ pipeline {
   // }
 
   environment{
-      def ECR_NAME = '043260917987.dkr.ecr.us-east-2.amazonaws.com/experimental_site'
+      def ECR_NAME = '043260917987.dkr.ecr.eu-west-2.amazonaws.com/experimental_site'
       def PROJECT = 'experimental_site'
       def VERSION = 'latest'
       
-      def REGION = "us-east-2"
+      def REGION = "eu-west-2c"
       // def SERVICE_NAME = "dw-web-panel"
       // def ECS_CLUSTER_SUFFIX = "-services-cluster"
 
