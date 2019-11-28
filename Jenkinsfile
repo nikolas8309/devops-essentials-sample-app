@@ -30,7 +30,6 @@ pipeline {
     stage('PrintInfo') {
         steps {
             sh """
-            // echo "deployToDev=${params.deployToDev}"
             echo "deployToStg=${params.deployToStg}"
             echo "deployToPrd=${params.deployToPrd}"
             """
@@ -45,13 +44,13 @@ pipeline {
       }
     }        
     
-    //stage('Bake docker image') {
-      //  steps{
-        //    script{
-          //      DCR_IMAGE = docker.build ("$IMAGE")
-            //}
-        //}
-    //}
+    stage('Bake docker image') {
+        steps{
+            script{
+                DCR_IMAGE = docker.build ("$IMAGE")
+            }
+        }
+    }
     
    
     
