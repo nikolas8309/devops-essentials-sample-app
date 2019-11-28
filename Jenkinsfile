@@ -6,7 +6,7 @@ pipeline {
   // }
 
   environment{
-      def ECR_NAME = '043260917987.dkr.ecr.eu-west-2.amazonaws.com/experimental_site'
+      def ECR_NAME = '043260917987.dkr.ecr.eu-west-2.amazonaws.com'
       def PROJECT = 'experimental_site'
       def VERSION = 'latest'
       
