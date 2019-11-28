@@ -10,7 +10,7 @@ pipeline {
       def PROJECT = 'experimental_site'
       def VERSION = 'latest'
       
-      def REGION = "eu-west-2c"
+      def REGION = "eu-west-2"
       // def SERVICE_NAME = "dw-web-panel"
       // def ECS_CLUSTER_SUFFIX = "-services-cluster"
 
