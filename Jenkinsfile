@@ -11,14 +11,11 @@ pipeline {
       def VERSION = 'latest'
       
       def REGION = "eu-west-2"
-      def SERVICE_NAME_STG = "experimental_site_stg"
-	  def SERVICE_NAME_PRD = "experimental_site_prd"
       def ECS_CLUSTER_SUFFIX = "-cluster"
 
       //auto populated, do not touch
       def IMAGE = "$ECR_NAME/$PROJECT:$VERSION"
       def ECRURL = "http://$ECR_NAME"
-      def ECRURLTEST = 'http://$ECR_NAME'
       
   }
   
@@ -34,8 +31,6 @@ pipeline {
             sh """
             echo "deployToStg=${params.deployToStg}"
             echo "deployToPrd=${params.deployToPrd}"
-			echo ${ECRURL}
-			echo ${ECRURLTEST}
             """
         }
     } 
@@ -80,9 +75,10 @@ pipeline {
         steps {
             script{    
                 environmentToDeploy='stg'
-                ECS_CLUSTER="${experimental-site}${ECS_CLUSTER_SUFFIX}"
+                ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
+				SERVICE_NAME="stg"
             }
-            ecsDeploy("$REGION","Nikolas","$ECS_CLUSTER","$SERVICE_NAME_STG","$IMAGE",false,"300","5")
+            ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
     }
 	
@@ -94,10 +90,10 @@ pipeline {
         steps {
             script{    
                 environmentToDeploy='prd'
-                ECS_CLUSTER="${experimental-site}${ECS_CLUSTER_SUFFIX}"
+                ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
+				SERVICE_NAME="prd"
             }
-            ecsDeploy("$REGION","Nikolas","$ECS_CLUSTER","$SERVICE_NAME_PRD","$IMAGE",                    
-			false,"300","5")
+            ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
     }
 
