@@ -78,7 +78,7 @@ pipeline {
                 ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
 				SERVICE_NAME="stg"
             }
-            ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
+            ecsDeploy("$REGION","AKIAQUEUNHDR4ZHCL7SN","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
     }
 	
@@ -93,7 +93,7 @@ pipeline {
                 ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
 				SERVICE_NAME="prd"
             }
-            ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
+            ecsDeploy("$REGION","AKIAQUEUNHDR4ZHCL7SN","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
     }
 
