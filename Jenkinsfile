@@ -39,6 +39,7 @@ pipeline {
       steps {
         sh """
             echo STEP!
+			aws --version
         """
       }
     }        
@@ -57,7 +58,7 @@ pipeline {
         steps{
             script{
                 // login to ECR
-                sh("eval \$(aws2 ecr get-login --no-include-email --region eu-west-2 | sed 's|https://||')")
+                sh("eval \$(aws ecr get-login --no-include-email --region eu-west-2 | sed 's|https://||')")
 
                 // Push the Docker image to ECR
                 docker.withRegistry(ECRURL){
