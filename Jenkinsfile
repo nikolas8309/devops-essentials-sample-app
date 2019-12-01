@@ -39,8 +39,6 @@ pipeline {
       steps {
         sh """
             echo STEP!
-			sudo apt-get install -y jq
-
         """
       }
     }        
