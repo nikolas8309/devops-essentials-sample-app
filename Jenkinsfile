@@ -39,7 +39,6 @@ pipeline {
       steps {
         sh """
             echo STEP!
-			aws --version
         """
       }
     }        
