@@ -75,8 +75,8 @@ pipeline {
         }
         steps {
             script{    
-                environmentToDeploy='stg'
-                ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
+                environmentToDeploy='experimental-site'
+                ECS_CLUSTER="${environmentToDeploy}"
 				SERVICE_NAME="stg"
             }
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
@@ -90,9 +90,8 @@ pipeline {
         }
         steps {
             script{    
-                environmentToDeploy='prd'
-                ECS_CLUSTER="${environmentToDeploy}${ECS_CLUSTER_SUFFIX}"
-				SERVICE_NAME="prd"
+                environmentToDeploy='experimental-site'
+                ECS_CLUSTER="${environmentToDeploy}"
             }
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
