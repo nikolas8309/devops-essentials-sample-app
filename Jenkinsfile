@@ -91,6 +91,7 @@ pipeline {
             script{    
                 environmentToDeploy='experimental-site'
                 ECS_CLUSTER="${environmentToDeploy}"
+				SERVICE_NAME="prd"
             }
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
