@@ -93,6 +93,7 @@ pipeline {
                 ECS_CLUSTER="${environmentToDeploy}"
 				SERVICE_NAME="prd"
             }
+			repositoryDownload
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
     }
