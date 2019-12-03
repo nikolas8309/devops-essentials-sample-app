@@ -70,7 +70,7 @@ pipeline {
 
 	stage('Download Repository') {
 		  steps {
-			code = load 'repositoryDownload.groovy'
+			repositoryDownload()
 		  }
 		}        
 
@@ -97,7 +97,6 @@ pipeline {
             script{    
                 ECS_CLUSTER="${ENVIRONMENT_TO_DEPLOY}"
 				SERVICE_NAME="prd"
-				repositoryDownload
             }
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
