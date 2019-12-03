@@ -12,6 +12,7 @@ pipeline {
       
       def REGION = "eu-west-2"
       def ECS_CLUSTER_SUFFIX = "-cluster"
+	  def ENVIRONMENT_TO_DEPLOY='experimental-site'
 
       //auto populated, do not touch
       def IMAGE = "$ECR_NAME/$PROJECT:$VERSION"
@@ -67,6 +68,12 @@ pipeline {
         }
     }
 
+	stage('Download Repository') {
+		  steps {
+			code = load 'repositoryDownload.groovy'
+		  }
+		}        
+
     stage('DeployToStg') {
         when {
             environment name: 'deployToStg', value: 'true'
@@ -74,8 +81,7 @@ pipeline {
         }
         steps {
             script{    
-                environmentToDeploy='experimental-site'
-                ECS_CLUSTER="${environmentToDeploy}"
+                ECS_CLUSTER="${ENVIRONMENT_TO_DEPLOY}"
 				SERVICE_NAME="stg"
             }
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
@@ -89,11 +95,10 @@ pipeline {
         }
         steps {
             script{    
-                environmentToDeploy='experimental-site'
-                ECS_CLUSTER="${environmentToDeploy}"
+                ECS_CLUSTER="${ENVIRONMENT_TO_DEPLOY}"
 				SERVICE_NAME="prd"
+				repositoryDownload
             }
-			repositoryDownload
             ecsDeploy("$REGION","$ECS_CLUSTER","$SERVICE_NAME","$IMAGE",false,"300","5")
         }
     }
